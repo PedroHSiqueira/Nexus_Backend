@@ -1,5 +1,6 @@
 import { PrismaClient, TipoProduto } from "@prisma/client";
 import { Router } from "express";
+import { verificaToken } from "../middewares/verificaToken"
 
 const prisma = new PrismaClient();
 const router = Router();
@@ -29,7 +30,7 @@ router.get("/", async (req, res) => {
 });
 
 
-router.post("/", async (req, res) => {
+router.post("/", verificaToken, async (req, res) => {
   const { modelo, preco, foto, configuracao, tipo, cor, adicional, marcaId } = req.body;
 
   if (!modelo || !preco || !foto || !configuracao || !tipo || !marcaId) {
@@ -58,7 +59,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verificaToken, async (req, res) => {
   const { id } = req.params;
   try {
     const produto = await prisma.produto.delete({
@@ -70,7 +71,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", verificaToken, async (req, res) => {
   const { id } = req.params;
   const { modelo, preco, foto, configuracao, tipo, marcaId } = req.body;
 
