@@ -30,9 +30,9 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", verificaToken, async (req, res) => {
-  const { modelo, preco, foto, configuracao, tipo, cor, adicional, marca, admin } = req.body;
+  const { modelo, preco, foto, configuracao, tipo, cor, adicional, marcaId, adminId } = req.body;
 
-  if (!modelo || !preco || !foto || !configuracao || !tipo || !marca) {
+  if (!modelo || !preco || !foto || !configuracao || !tipo || !marcaId) {
     res.status(400).json({
       erro: "Informe modelo, preco, foto, configuracao, tipo, cor, adicional e marcaId",
     });
@@ -49,8 +49,8 @@ router.post("/", verificaToken, async (req, res) => {
         tipo,
         cor,
         adicional,
-        marca,
-        admin,
+        marcaId,
+        adminId,
       },
     });
     res.status(201).json(produto);
