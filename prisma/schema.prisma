@@ -35,9 +35,22 @@ model Produto {
   updatedAt    DateTime     @updatedAt
   marca        Marca        @relation(fields: [marcaId], references: [id])
   marcaId      Int
+  admin       Admin        @relation(fields: [adminId], references: [id])
+  adminId     Int 
   avaliacao    Avaliacoes[]
 
   @@map("produtos")
+}
+
+model Admin {
+  id           Int      @id @default(autoincrement())
+  nome         String   @db.VarChar(60)
+  email        String   @db.VarChar(60) @unique
+  senha        String   @db.VarChar(60)   // senha deve ser varchar(60)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt  
+  produtos       Produto[]
+  @@map("admins")
 }
 
 model Avaliacoes {

@@ -3,6 +3,7 @@ import marcasRoutes from './routes/marcas'
 import produtosRoutes from './routes/produtos'
 import clienterRoutes from './routes/clientes'
 import avalicoesRoutes from './routes/avaliacoes'
+import adminsRoutes from './routes/admins'
 import cors from 'cors'
 const app = express()
 const port = 3004
@@ -22,6 +23,7 @@ app.use("/marcas", marcasRoutes)
 app.use("/produtos", produtosRoutes)
 app.use("/clientes", clienterRoutes)
 app.use("/avaliacoes", avalicoesRoutes)
+app.use("/admins", adminsRoutes)
 
 app.get('/', (req, res) => {
   res.send('API: Sistema de vendas de produtos para computadores')
